@@ -2,70 +2,37 @@
   <div class="contenedor">
     <h1>Componente Actualizar</h1>
 
-    <h3 for="">Ingrese el ID Estudiante a Actualizar</h3>
-    <input v-model="id" type="text" placeholder="id" />
-
-    <div class="insertar">
-      <h3 for="">Ingrese los datos del Estudiante a Actualizar</h3>
-      <label for="">Nombre:</label>
-      <input v-model="nombre" type="text" placeholder="nombre" />
-      <label for="">Apellido:</label>
-      <input v-model="apellido" type="text" />
-      <label for="">Genero:</label>
-      <input v-model="genero" type="text" />
-      <label for="">Fecha de Nacimiento:</label>
-      <input v-model="fechaNacimiento" type="text" />
-      <label for="">Hobby:</label>
-      <input v-model="hobby" type="text" />
-      <label for="">Edad:</label>
-      <input v-model="edad" type="text" />
-      <label for="">Estado Civil:</label>
-      <input v-model="estadoCivil" type="text" />
-      <label for="">Numero de Hermanos:</label>
-      <input v-model="numeroHermanos" type="text" />
-      <label for="">Direccion:</label>
-      <input v-model="direccion" type="text" />
+    <div class="idText">
+      <h3 for="">Ingrese el ID Estudiante a Actualizar</h3>
+      <input v-model="id" type="text" placeholder="id" />
     </div>
 
-    <div>
-      <button @click="actualizar">Actualizar</button>
-    </div>
+    <Estudiante
+      nombreBoton="Actualizar!!!"
+      @miEventoFormulario="actualizar($event)"
+    />
   </div>
 </template>
    
 <script>
+import Estudiante from "./Estudiante.vue";
 import { actualizarFachada } from "../helpers/clienteEstudiante.js";
 
 export default {
+  components: {
+    Estudiante,
+  },
   data() {
     return {
       id: null,
-      nombre: null,
-      apellido: null,
-      genero: null,
-      fechaNacimiento: null,
-      hobby: null,
-      edad: null,
-      estadoCivil: null,
-      numeroHermanos: null,
-      direccion: null,
     };
   },
 
   methods: {
-    async actualizar() {
-      const body = {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        genero: this.genero,
-        fechaNacimiento: this.fechaNacimiento,
-        hobby: this.hobby,
-        edad: this.edad,
-        estadoCivil: this.estadoCivil,
-        numeroHermanos: this.numeroHermanos,
-        direccion: this.direccion,
-      };
-      await actualizarFachada(this.id, body);
+    async actualizar(estudianteRecibido) {
+      //let a = estudianteRecibido.id; PILAS, que en este objeto no viene el id!
+      await actualizarFachada(this.id, estudianteRecibido);
+      console.log("Estudiante actualizado:", this.id);
     },
   },
 };
@@ -83,25 +50,11 @@ export default {
   border: solid 1px black;
 }
 
-.insertar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 300px;
-  margin: 10px auto;
-  background-color: rgb(180, 255, 127);
-  border: solid 1px black;
-  padding: 15px;
-}
-
-button {
-  margin: 10px;
-  background-color: rgb(255, 206, 127);
-  border: solid 1px black;
-}
-
 h3 {
   margin: 20px;
+}
+
+.idText{
+  margin-bottom: 20px;
 }
 </style>

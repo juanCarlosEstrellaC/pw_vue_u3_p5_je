@@ -1,13 +1,5 @@
 <template>
   <div class="contenedor">
-    <h1>Componente Estudiante</h1>
-
-    <div class="consulta">
-      <h3 for="">Ingrese el ID Estudiante</h3>
-      <input v-model="id" type="text" placeholder="id"/>
-      <button @click="consultarPorId">Consultar</button>
-    </div>
-
     <div class="insertar">
       <h3 for="">Ingrese los datos del Estudiante a ingresar</h3>
       <label for="">Nombre:</label>
@@ -29,28 +21,16 @@
       <label for="">Direccion:</label>
       <input v-model="direccion" type="text" />
 
-      <button @click="insertar">Insertar</button>
-    </div>
-
-    <div>
-      <button @click="actualizar">Actualizar</button>
-    </div>
-
-    <div>
-      <button @click="eliminar">Eliminar</button>
+      <button @click="presionarBoton">{{ nombreBoton }}</button>
     </div>
   </div>
 </template>
    
 <script>
-import {
-  consultarEstudianteFachada,
-  insertarFachada,
-  actualizarFachada,
-  eliminarFachada
-} from "../helpers/clienteEstudiante.js";
-
 export default {
+  props: {
+    nombreBoton: String,
+  },
   data() {
     return {
       id: null,
@@ -67,13 +47,8 @@ export default {
   },
 
   methods: {
-    async consultarPorId() {
-      const data = await consultarEstudianteFachada(this.id);
-      console.log("Desde componente");
-      console.log(data);
-    },
-    async insertar() {
-      const estuBody = {
+    presionarBoton() {
+      const estudiante = {
         nombre: this.nombre,
         apellido: this.apellido,
         genero: this.genero,
@@ -84,25 +59,8 @@ export default {
         numeroHermanos: this.numeroHermanos,
         direccion: this.direccion,
       };
-      await insertarFachada(estuBody);
+      this.$emit("miEventoFormulario", estudiante);
     },
-    async actualizar() {
-      const body = {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        genero: this.genero,
-        fechaNacimiento: this.fechaNacimiento,
-        hobby: this.hobby,
-        edad: this.edad,
-        estadoCivil: this.estadoCivil,
-        numeroHermanos: this.numeroHermanos,
-        direccion: this.direccion,
-      };
-      await actualizarFachada(this.id, body);
-    },
-    async eliminar(){
-      await eliminarFachada(this.id);
-    }
   },
 };
 </script>
@@ -116,17 +74,6 @@ export default {
   width: 400px;
   margin: 0 auto;
   background-color: rgb(170, 252, 225);
-  border: solid 1px black;
-}
-
-.consulta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 300px;
-  margin: 10px auto;
-  background-color: rgb(255, 246, 127);
   border: solid 1px black;
 }
 
