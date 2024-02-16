@@ -1,5 +1,8 @@
 <template>
-  <EstudiantePagina></EstudiantePagina>
+  <EstudiantePagina />
+
+  <router-view />
+  
 </template>
  
 <script>
