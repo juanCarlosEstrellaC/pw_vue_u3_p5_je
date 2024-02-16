@@ -15,6 +15,15 @@ const insertar = async (body) => {
     console.log(data);
 }
 
+const actualizar = async (id, body) => {
+    const data = axios.put(`http://localhost:8082/API/v1.0/Matricula/estudiantes/${id}`, body).then(r => r.data)
+    console.log(data);
+}
+
+const eliminar = async (id) => {
+    const data = axios.delete(`http://localhost:8082/API/v1.0/Matricula/estudiantes/${id}`).then(r => r.data)
+    console.log(data);
+}
 
 // METODOS FACHADAS: (siempre los debo exportar)
 export const consultarEstudianteFachada = async (id) => {
@@ -23,4 +32,12 @@ export const consultarEstudianteFachada = async (id) => {
 
 export const insertarFachada = async (body) => {
     await insertar(body);
+}
+
+export const actualizarFachada = async (id, body) => {
+    await actualizar(id, body);
+}
+
+export const eliminarFachada = async(id) =>{
+    await eliminar(id);
 }

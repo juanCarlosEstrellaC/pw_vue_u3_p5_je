@@ -3,15 +3,15 @@
     <h1>Componente Estudiante</h1>
 
     <div class="consulta">
-      <h3 for="">Ingrese el ID Estudiante a consultar</h3>
-      <input v-model="id" type="text" />
+      <h3 for="">Ingrese el ID Estudiante</h3>
+      <input v-model="id" type="text" placeholder="id"/>
       <button @click="consultarPorId">Consultar</button>
     </div>
 
     <div class="insertar">
       <h3 for="">Ingrese los datos del Estudiante a ingresar</h3>
       <label for="">Nombre:</label>
-      <input v-model="nombre" type="text" />
+      <input v-model="nombre" type="text" placeholder="nombre" />
       <label for="">Apellido:</label>
       <input v-model="apellido" type="text" />
       <label for="">Genero:</label>
@@ -31,6 +31,14 @@
 
       <button @click="insertar">Insertar</button>
     </div>
+
+    <div>
+      <button @click="actualizar">Actualizar</button>
+    </div>
+
+    <div>
+      <button @click="eliminar">Eliminar</button>
+    </div>
   </div>
 </template>
    
@@ -38,6 +46,8 @@
 import {
   consultarEstudianteFachada,
   insertarFachada,
+  actualizarFachada,
+  eliminarFachada
 } from "../helpers/clienteEstudiante.js";
 
 export default {
@@ -76,6 +86,23 @@ export default {
       };
       await insertarFachada(estuBody);
     },
+    async actualizar() {
+      const body = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        genero: this.genero,
+        fechaNacimiento: this.fechaNacimiento,
+        hobby: this.hobby,
+        edad: this.edad,
+        estadoCivil: this.estadoCivil,
+        numeroHermanos: this.numeroHermanos,
+        direccion: this.direccion,
+      };
+      await actualizarFachada(this.id, body);
+    },
+    async eliminar(){
+      await eliminarFachada(this.id);
+    }
   },
 };
 </script>
@@ -88,7 +115,7 @@ export default {
   flex-direction: column;
   width: 400px;
   margin: 0 auto;
-  background-color: aquamarine;
+  background-color: rgb(170, 252, 225);
   border: solid 1px black;
 }
 
@@ -120,7 +147,7 @@ button {
   border: solid 1px black;
 }
 
-h3{
-  margin:  20px;
+h3 {
+  margin: 20px;
 }
 </style>
