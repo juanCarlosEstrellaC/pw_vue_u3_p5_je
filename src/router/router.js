@@ -1,28 +1,28 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-// Importo las páginas que voy a trabajar como rutas:
-import EstudianteActualizar from '../pages/EstudianteActualizar.vue'
-import EstudianteConsultar from '../pages/EstudianteConsultar.vue'
-import EstudianteEliminar from '../pages/EstudianteEliminar.vue'
-import EstudianteGuardar from '../pages/EstudianteGuardar.vue'
-
 // A cada página le asigno una ruta:
+// Importo las páginas que voy a trabajar como rutas en cada ruta para tener 
+// lazyload
 const routes = [
     {
         path: '/actualizar',
-        component: EstudianteActualizar
+        component: () => import('../pages/EstudianteActualizar.vue')
     },
     {
         path: '/consultar',
-        component: EstudianteConsultar
+        component: () => import('../pages/EstudianteConsultar.vue')
     },
     {
         path: '/eliminar',
-        component: EstudianteEliminar
+        component: () => import('../pages/EstudianteEliminar.vue')
     },
     {
         path: '/grabar',
-        component: EstudianteGuardar
+        component: () => import('../pages/EstudianteGuardar.vue')
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        component: () => import('../pages/NoFoundPage.vue')
     }
 ]
 
