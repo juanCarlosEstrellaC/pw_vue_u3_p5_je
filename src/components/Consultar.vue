@@ -14,6 +14,11 @@
 import { consultarEstudianteFachada } from "../helpers/clienteEstudiante.js";
 
 export default {
+  // created(){
+  //   console.log(this.$router);
+  //   console.log(this.$route.params.id);
+  //   //this.consultarPorId(this.id)
+  // },
   data() {
     return {
       id: null,
