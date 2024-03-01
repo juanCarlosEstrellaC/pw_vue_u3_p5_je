@@ -2,12 +2,14 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 // A cada página le asigno una ruta:
 // Importo las páginas que voy a trabajar como rutas en cada ruta para tener 
-// lazyload
+// lazyload. De otra manera, como lo hacía antes, importaba toodas las páginas de forma
+// global, y siempre se cargaban a pesar que vaya usar una sola, como consultar, por ejemplo.
+
 const routes = [
     {
         path: '/actualizar',
         component: () => import('../pages/EstudianteActualizar.vue')
-    },
+    },  
     {
         path: '/consultar/:id',
         component: () => import('../pages/EstudianteConsultar.vue')

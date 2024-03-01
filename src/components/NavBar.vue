@@ -26,6 +26,6 @@ div a {
     background-color: aqua;
 }
 .router-link-exact-active{
-    background-color: white;
+    background-color: rgb(77, 141, 220);
 }
 </style>

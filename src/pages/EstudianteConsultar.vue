@@ -13,8 +13,8 @@ export default {
     console.log(this.$router);
     console.log(this.$route.params.id);
     console.log(this.$route.query);
-    console.log(this.$route.query.edad);
-    console.log(this.$route.query.id);
+    console.log(this.$route.query.nombre);
+    console.log(this.$route.query.genero);
   },
 };
 </script>
